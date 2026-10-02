@@ -1,12 +1,14 @@
 function getComputerChoice() {
-    let randomNum = Math.floor(Math.random()*98) + 1
+    let randomNum = Math.floor(Math.random()*2) + 1
     let computerChoice = null
-    if (randomNum % 3 === 0){
+    if (randomNum === 1){
         computerChoice = "Rock"
-    } else if (randomNum % 2 === 0) {
+    } else if (randomNum === 2) {
         computerChoice = "Paper"
-    } else {
+    } else if (randomNum === 3) {
         computerChoice = "Scissors"
+    } else {
+        console.log("An error occurred")
     }
 
 
