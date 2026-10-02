@@ -10,4 +10,9 @@ function getComputerChoice() {
     }
 }
 
+function getHumanChoice() {
+    return prompt("Enter your move: ")
+}
+
 console.log(getComputerChoice())
+console.log(getHumanChoice())
