@@ -1,5 +1,5 @@
 function getComputerChoice() {
-    let randomNum = Math.floor(Math.random()*2) + 1
+    let randomNum = Math.floor(Math.random()*3) + 1
     let computerChoice = null
     if (randomNum === 1){
         computerChoice = "Rock"
