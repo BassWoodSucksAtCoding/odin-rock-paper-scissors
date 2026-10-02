@@ -11,6 +11,7 @@ function getComputerChoice() {
 
 
     console.log(computerChoice)
+    return computerChoice
 }
 
 function getHumanChoice() {
@@ -53,11 +54,31 @@ function playRound(humanChoice, computerChoice) {
         }
     }
 
-    console.log(`Your score $(humanScore)`)
-    console.log(`Computer score $(computerScore)`)
+    console.log(`Your score ${humanScore}`)
+    console.log(`Computer score ${computerScore}`)
+}
+
+function playGame() {
+    for (let i=0; i<=4; i++){
+        console.log(`Round ${i+1}`)
+        playRound(getHumanChoice(),getComputerChoice())
+    }
+
+    console.log("=========")
+    console.log("Calculating winner...")
+
+    if (humanScore > computerScore) {
+        console.log("You win!")
+    } else if (computerScore > humanScore) {
+        console.log("You lose!")
+    } else {
+        console.log("Tie")
+    }
 }
 
 let humanScore = 0
 let computerScore = 0
 
-playRound(getHumanChoice(),getComputerChoice())
+playGame()
+
+
