@@ -11,8 +11,6 @@ function getComputerChoice() {
         console.log("An error occurred")
     }
 
-
-    console.log(computerChoice)
     return computerChoice
 }
 
@@ -23,6 +21,22 @@ function getHumanChoice() {
 function playRound(humanChoice, computerChoice) {
     humanChoice = humanChoice.toUpperCase()
     computerChoice = computerChoice.toUpperCase()
+
+    while (resultsDiv.firstChild) {
+        resultsDiv.removeChild(resultsDiv.lastChild)
+    }
+
+    const title = document.createElement('h2')
+    const computerSelectionText = document.createElement('p')
+    const humanSelectionText = document.createElement('p')
+
+    computerSelectionText.textContent = `Computer selected: ${computerChoice}`
+    humanSelectionText.textContent = `You selected: ${humanChoice}`
+    title.textContent = 'Results'
+
+    resultsDiv.appendChild(title)
+    resultsDiv.appendChild(computerSelectionText)
+    resultsDiv.appendChild(humanSelectionText)
 
     if (humanChoice === "ROCK") {
         if (computerChoice === "ROCK") {
@@ -56,31 +70,43 @@ function playRound(humanChoice, computerChoice) {
         }
     }
 
-    console.log(`Your score ${humanScore}`)
-    console.log(`Computer score ${computerScore}`)
+    humanScoreParagraph.textContent = `Your Score: ${humanScore}`
+    computerScoreParagraph.textContent = `Computer Score: ${computerScore}`
+    playGame()
+}
+
+function announceWinner(text) {
+    const winText = document.createElement('p')
+    winText.textContent = text
+    scoreDiv.appendChild(winText)
+
+    inputButtons.forEach(element => element.disabled = true)
 }
 
 function playGame() {
-    for (let i=0; i<=4; i++){
-        console.log(`Round ${i+1}`)
-        playRound(getHumanChoice(),getComputerChoice())
-    }
 
-    console.log("=========")
-    console.log("Calculating winner...")
-
-    if (humanScore > computerScore) {
-        console.log("You win!")
-    } else if (computerScore > humanScore) {
-        console.log("You lose!")
-    } else {
-        console.log("Tie")
-    }
+    if (humanScore === 5) {
+        announceWinner('You win!')
+    } else if (computerScore === 5) {
+        announceWinner('You lose!')
+    } 
 }
 
 let humanScore = 0
 let computerScore = 0
 
-playGame()
+const computerScoreParagraph = document.querySelector('#computerScore')
+const humanScoreParagraph = document.querySelector('#humanScore')
+const inputButtons = document.querySelectorAll('button')
+const scoreDiv = document.querySelector('#score')
+const resultsDiv = document.querySelector('#results')
 
+
+inputButtons.forEach((element) => {
+    element.addEventListener('click',(event) => {
+        const humanChoice = event.target.textContent
+        const computerChoice = getComputerChoice()
+        playRound(humanChoice, computerChoice)
+    })
+})
 
